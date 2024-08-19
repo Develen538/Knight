@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ManegerGame : MonoBehaviour
@@ -30,7 +27,7 @@ public class ManegerGame : MonoBehaviour
 
          if (Size == 1)
          {
-           _animatorPlayer.SetFloat("Attack", 1);
+            _animatorPlayer.SetFloat("Attack", 1);
             _animatorArcher.SetFloat("Attack", 1);
             _animatorEnamyWizard.SetFloat("Attack", 0);
             _animatorEnamyWarrior.SetFloat("Attack", 0);
@@ -53,36 +50,43 @@ public class ManegerGame : MonoBehaviour
 
     private void Bars()
     {
-        var allGameInfo = Resources.LoadAll<GameInfo>("");
+        var allPlayerInfo = Resources.LoadAll<GameInfo>("");
+        var allEnamyInfo = Resources.LoadAll<EnamyInfo>("");
 
-        foreach (var GameInfo in allGameInfo)
+        foreach (var PlayerInfo in allPlayerInfo)
         {
-            _armor.maxValue = GameInfo.Armor;
-            _healh.maxValue = GameInfo.Healh;
-            _enamyHealh.maxValue = GameInfo.EnemyHealh;
+            _armor.maxValue = PlayerInfo.Armor;
+            _healh.maxValue = PlayerInfo.Healh;
+        }
+        foreach (var EnamyInfo in allEnamyInfo)
+        {
+            _enamyHealh.maxValue = EnamyInfo.EnemyHealh;
         }
     }
 
     private void Attacks(Slider armor, Slider healh, Slider Enemyhealh, string invoke, float time, int number)
     {
         var allGameInfo = Resources.LoadAll<GameInfo>("");
+        var allEnamyInfo = Resources.LoadAll<EnamyInfo>("");
 
-        foreach (var GameInfo in allGameInfo)
+        foreach (var PlayerInfo in allGameInfo)
         {
-            armor.value = GameInfo.Armor;
-            healh.value = GameInfo.Healh;
-            Enemyhealh.value = GameInfo.EnemyHealh;
+            armor.value = PlayerInfo.Armor;
+            healh.value = PlayerInfo.Healh;
 
-          
+            foreach (var EnamyInfo in allEnamyInfo)
+            {
+                Enemyhealh.value = EnamyInfo.EnemyHealh;
 
-            if (number == 1)
-            {
-                GameInfo.EnemyHealh -= GameInfo.Attack / GameInfo.EnemyArmor;
-               
-            }
-            else if (number == 2)
-            {
-                GameInfo.Healh -= GameInfo.EnemyAttack / GameInfo.Armor;
+                if (number == 1)
+                {
+                    EnamyInfo.EnemyHealh -= PlayerInfo.Attack / EnamyInfo.EnemyArmor;
+
+                }
+                else if (number == 2)
+                {
+                    PlayerInfo.Healh -= EnamyInfo.EnemyAttack / PlayerInfo.Armor;
+                }
             }
         }
         Invoke(invoke, time);

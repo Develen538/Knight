@@ -9,29 +9,33 @@ public class CloseCombat : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private Sprite[] _icon;
     [SerializeField] private Image _image;
+    [SerializeField] private Fight _fight;
 
-    private int number = 0;
+    private int numbers;
 
     public void Attack()
     {
-        if (number == 0)
+        if (numbers == 0)
         {
-            Time.timeScale = 0;
+            if (_fight.number == 1)
+            {
+                Time.timeScale = 0;
 
-            _image.sprite = _icon[0];
-            number = 1;
+                _image.sprite = _icon[0];
+                numbers = 1;
 
-            _player.SetActive(true);
-            _archer.SetActive(false);
+                _player.SetActive(true);
+                _archer.SetActive(false);
 
-            Time.timeScale = 1;
+                Time.timeScale = 1;
+            }
         }
-        else if (number == 1)
+        else if (numbers == 1)
         {
             Time.timeScale = 0;
 
             _image.sprite = _icon[1];
-            number = 0;
+            numbers = 0;
 
             _player.SetActive(false);
             _archer.SetActive(true);

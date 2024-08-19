@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WinAndLose : MonoBehaviour
 {
+    [SerializeField] private Slider _healh;
+    [SerializeField] private Slider _enamyHealh;
+
     private void Update()
     {
         WinAndLosee();
@@ -11,14 +15,18 @@ public class WinAndLose : MonoBehaviour
     private void WinAndLosee()
     {
         var allGameInfo = Resources.LoadAll<GameInfo>("");
+        var allEnamyInfo = Resources.LoadAll<EnamyInfo>("");
 
-        foreach (var GameInfo in allGameInfo)
+        foreach (var PlayerInfo in allGameInfo)
         {
-            if (GameInfo.EnemyHealh <= 0 || GameInfo.Healh <= 0)
+            foreach (var EnamyInfo in allEnamyInfo)
             {
-                GameInfo.Healh = 100;
-                GameInfo.EnemyHealh = 100;
-                SceneManager.LoadScene(0);
+                if (EnamyInfo.EnemyHealh <= 0 || PlayerInfo.Healh <= 0)
+                {
+                    PlayerInfo.Healh = 100;
+                    EnamyInfo.EnemyHealh = 100;
+                    SceneManager.LoadScene(0);
+                }
             }
         }
     }

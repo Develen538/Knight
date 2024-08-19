@@ -11,13 +11,21 @@ public class Healh : MonoBehaviour
     {
         var allGameInfo = Resources.LoadAll<GameInfo>("");
 
-        foreach (var Game in allGameInfo)
+        foreach (var Player in allGameInfo)
         {
-            Game.Healh += 100;
-
-            if(Game.Healh == _healh.maxValue)
+            if(Player.Healh >= _healh.maxValue)
             {
-                Game.Healh += 0;
+                Player.Healh += 0;
+            }
+            else
+            {
+                float Size = _healh.maxValue - _healh.value;
+                Player.Healh += Size;
+
+                if (Player.Healh >= _healh.maxValue)
+                {
+                    Player.Healh += 0;
+                }
             }
         }
     }

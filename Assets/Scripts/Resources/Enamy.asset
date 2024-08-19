@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bad9df5ec19478744880f58833580576, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 35f5cb60d9aa7d04f863b5ea2d1f536b, type: 3}
+  m_Name: Enamy
   m_EditorClassIdentifier: 
-  Healh: 100
-  Armor: 1
-  Attack: 7
+  EnemyHealh: 100
+  EnemyArmor: 1
+  EnemyAttack: 5

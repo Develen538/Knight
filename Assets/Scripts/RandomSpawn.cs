@@ -16,7 +16,7 @@ public class RandomSpawn : MonoBehaviour
     {
         int rand = Random.Range(1, 3);
 
-        if(rand == 1)
+        if (rand == 1)
         {
             _warrior.SetActive(true);
             _wizard.SetActive(false);

@@ -9,7 +9,7 @@ public class Fight : MonoBehaviour
     [SerializeField] private Sprite[] _icon;
     [SerializeField] private Image _image;
 
-    private int number = 0;
+    public int number;
 
     private void Start()
     {
@@ -20,12 +20,16 @@ public class Fight : MonoBehaviour
     {
         if (number == 0)
         {
+            var allPlayerInfo = Resources.LoadAll<GameInfo>("");
+            var allEnamyInfo = Resources.LoadAll<EnamyInfo>("");
+
             Time.timeScale = 1;
             _image.sprite = _icon[1];
             number = 1;
 
             _healh.SetActive(false);
         }
+
         else if (number == 1)
         {
             Time.timeScale = 0;
